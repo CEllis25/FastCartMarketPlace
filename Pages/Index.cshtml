@@ -1,10 +1,42 @@
 ﻿@page
 @model IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">FastCart Marketplace</h1>
+        <p class="col-md-8 fs-4">
+            Browse products, read customer reviews, and manage orders in a simple ASP.NET Core e-commerce web app.
+        </p>
+        <a class="btn btn-primary btn-lg" asp-page="/Products/Index">Shop Products</a>
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+            <h4>Products</h4>
+            <p>View product details, prices, stock, and images.</p>
+            <a asp-page="/Products/Index" class="btn btn-outline-primary">View Products</a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+            <h4>Reviews</h4>
+            <p>Read customer ratings and feedback for marketplace items.</p>
+            <a asp-page="/Reviews/Index" class="btn btn-outline-primary">View Reviews</a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm p-3">
+            <h4>Orders</h4>
+            <p>Create and manage customer orders using EF Core relationships.</p>
+            <a asp-page="/Orders/Index" class="btn btn-outline-primary">View Orders</a>
+        </div>
+    </div>
 </div>

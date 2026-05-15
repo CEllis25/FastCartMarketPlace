@@ -3,6 +3,7 @@ using System;
 using FastCartMarketPlace.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FastCartMarketPlace.Migrations
 {
     [DbContext(typeof(FastCartContext))]
-    partial class FastCartContextModelSnapshot : ModelSnapshot
+    [Migration("20260515011545_SeedProductsAndReviews")]
+    partial class SeedProductsAndReviews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.8");

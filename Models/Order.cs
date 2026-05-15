@@ -13,8 +13,7 @@ namespace FastCartMarketPlace.Models
 
         [Required]
         public string ShippingAddress { get; set; } = "";
-
-        // Navigation Property
+        
         public List<OrderItem>? OrderItems { get; set; }
     }
 }

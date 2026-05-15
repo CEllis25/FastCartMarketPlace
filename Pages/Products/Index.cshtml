@@ -1,0 +1,97 @@
+@page
+@model FastCartMarketPlace.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1 class="mb-4">FastCart Marketplace</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New Product</a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model.Product)
+    {
+        var reviewCount = item.Reviews?.Count ?? 0;
+        var avgRating = reviewCount > 0 ? item.Reviews!.Average(r => r.Rating) : 0;
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        <img src="~/img/@item.ImageURL"
+                             alt="@item.Name"
+                             class="img-fluid rounded"
+                             style="max-height: 180px; object-fit: contain;" />
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+
+                            <p class="card-text">@item.Description</p>
+
+                            <p class="mb-1"><strong>Category:</strong> @item.Category</p>
+                            <p class="mb-1"><strong>Price:</strong> @item.Price.ToString("C")</p>
+                            <p class="mb-1"><strong>Stock:</strong> @item.StockQuantity</p>
+
+                            <p class="mb-2">
+                                <strong>Rating:</strong>
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= Math.Round(avgRating))
+                                    {
+                                        <span class="text-warning">★</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">☆</span>
+                                    }
+                                }
+                                <span>(@avgRating.ToString("0.0") / 5 from @reviewCount reviews)</span>
+                            </p>
+
+                            <p>
+                                <button class="btn btn-outline-dark btn-sm"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#reviews-@item.ProductID">
+                                    Show Reviews
+                                </button>
+                            </p>
+
+                            <div class="collapse mb-3" id="reviews-@item.ProductID">
+                                @if (reviewCount > 0)
+                                {
+                                    foreach (var review in item.Reviews!)
+                                    {
+                                        <div class="border rounded p-2 mb-2">
+                                            <strong>@review.CustomerName</strong>
+                                            <span class="text-warning">
+                                                @for (int i = 1; i <= review.Rating; i++)
+                                                {
+                                                    <span>★</span>
+                                                }
+                                            </span>
+                                            <p class="mb-0">@review.Comment</p>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>No reviews yet.</p>
+                                }
+                            </div>
+
+                            <a asp-page="./Details" asp-route-id="@item.ProductID" class="btn btn-outline-primary btn-sm">Details</a>
+                            <a asp-page="./Edit" asp-route-id="@item.ProductID" class="btn btn-outline-secondary btn-sm">Edit</a>
+                            <a asp-page="./Delete" asp-route-id="@item.ProductID" class="btn btn-outline-danger btn-sm">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

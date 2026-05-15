@@ -16,7 +16,6 @@ namespace FastCartMarketPlace.Models
 
         public string Comment { get; set; } = "";
 
-        // Navigation Property
         public Product? Product { get; set; }
     }
 }
