@@ -1,7 +1,12 @@
+using FastCartMarketPlace.Data;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<FastCartContext>(options =>
+    options.UseSqlite("Data Source=fastcart.db"));
 
 var app = builder.Build();
 
