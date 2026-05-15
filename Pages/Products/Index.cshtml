@@ -6,6 +6,35 @@
 }
 
 <h1 class="mb-4">FastCart Marketplace</h1>
+<form method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text"
+               name="searchString"
+               value="@Model.CurrentFilter"
+               class="form-control"
+               placeholder="Search products..." />
+
+        <button type="submit" class="btn btn-primary">Search</button>
+
+        <a asp-page="./Index" class="btn btn-outline-secondary">Clear</a>
+    </div>
+</form>
+
+<div class="mb-3">
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.NameSort"
+       asp-route-searchString="@Model.CurrentFilter"
+       class="btn btn-outline-dark btn-sm">
+        Sort by Name
+    </a>
+
+    <a asp-page="./Index"
+       asp-route-sortOrder="@Model.PriceSort"
+       asp-route-searchString="@Model.CurrentFilter"
+       class="btn btn-outline-dark btn-sm">
+        Sort by Price
+    </a>
+</div>
 
 <p>
     <a asp-page="Create" class="btn btn-primary">Create New Product</a>
@@ -95,3 +124,33 @@
         </div>
     }
 </div>
+
+<nav>
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+            <a class="page-link"
+               asp-page="./Index"
+               asp-route-pageIndex="@(Model.PageIndex - 1)"
+               asp-route-searchString="@Model.CurrentFilter"
+               asp-route-sortOrder="@Model.CurrentSort">
+                Previous
+            </a>
+        </li>
+
+        <li class="page-item disabled">
+            <span class="page-link">
+                Page @Model.PageIndex of @Model.TotalPages
+            </span>
+        </li>
+
+        <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+            <a class="page-link"
+               asp-page="./Index"
+               asp-route-pageIndex="@(Model.PageIndex + 1)"
+               asp-route-searchString="@Model.CurrentFilter"
+               asp-route-sortOrder="@Model.CurrentSort">
+                Next
+            </a>
+        </li>
+    </ul>
+</nav>
